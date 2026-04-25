@@ -32,28 +32,38 @@ def SEIR_equations(t, y, infection_rate, incubation_rate, recovery_rate):
 
 # verifying its working by plotting results and comparing the results with the figure provided 
 # definining initial conditions 
-initial_conditions = [0.99, 0.01, 0.0, 0.0]
-start_time = 0
-end_time = 100
-time_points = np.linspace(start_time, end_time, 1000)
 
-infection_rate = 1.0
-incubation_rate = 1.0
-recovery_rate = 0.1
+def run_SEIR_Simulation(title = "default",
+                        initial_conditions = [0.99, 0.01, 0.0, 0.0], 
+                        start_time = 0,
+                        end_time = 100,
+                        infection_rate = 1.0,
+                        incubation_rate = 1.0,
+                        recovery_rate = 0.1):
+    
+    time_points = np.linspace(start_time, end_time, 1000)
 
-results = solve_ivp(SEIR_equations, [start_time, end_time], initial_conditions, 
-                   args=(infection_rate, incubation_rate, recovery_rate),
-                   t_eval = time_points)
+    results = solve_ivp(SEIR_equations, [start_time, end_time], initial_conditions,
+                        args=(infection_rate, incubation_rate, recovery_rate),
+                        t_eval=time_points)
 
-t = results.t
-s = results.y[0]
-e = results.y[1]
-i = results.y[2]
-r = results.y[3]
+    t = results.t
+    s = results.y[0]
+    e = results.y[1]
+    i = results.y[2]
+    r = results.y[3]
 
-plt.plot(t, s, label="Susceptible")
-plt.plot(t, e, label="Exposed")
-plt.plot(t, i, label="Infected")
-plt.plot(t, r, label="Recovered")
-plt.legend()
-plt.show()
+    plt.figure()
+    plt.plot(t, s, label="Susceptible")
+    plt.plot(t, e, label="Exposed")
+    plt.plot(t, i, label="Infected")
+    plt.plot(t, r, label="Recovered")
+    plt.xlabel("Time")
+    plt.ylabel("Fraction of population")
+    plt.title(title)
+    plt.legend()
+    plt.show()
+
+    return results
+
+run_SEIR_Simulation()
