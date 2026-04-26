@@ -17,13 +17,13 @@ def monte(myfunc, xmin, xmax, N):
 # creating the function to solve the coupled set of equations (7) - (10)
 # (infection_rate = beta, incubation_rate = sigma, recovery_rate = gamma) 
 
-def SEIR_equations(t, y, exposure_rate, incubation_rate, recovery_rate):
+def SEIR_equations(t, y, infection_rate, incubation_rate, recovery_rate):
     s = y[0]
     e = y[1]
     i = y[2]
     r = y[3]
-    dsdt = -exposure_rate * i * s
-    dedt = (exposure_rate * i * s) - (incubation_rate * e)
+    dsdt = -infection_rate * i * s
+    dedt = (infection_rate * i * s) - (incubation_rate * e)
     didt = (incubation_rate * e) - (recovery_rate * i)
     drdt = recovery_rate * i 
 
@@ -37,7 +37,7 @@ def run_SEIR_Simulation(title = "default",
                         initial_conditions = [0.99, 0.01, 0.0, 0.0], 
                         start_time = 0,
                         end_time = 100,
-                        exposure_rate = 1.0,
+                        infection_rate = 1.0,
                         incubation_rate = 1.0,
                         recovery_rate = 0.1):
     
@@ -46,7 +46,7 @@ def run_SEIR_Simulation(title = "default",
 
     # solving the SEIR equations at each time step and results of the SEIR model for every day
     results = solve_ivp(SEIR_equations, [start_time, end_time], initial_conditions,
-                        args=(exposure_rate, incubation_rate, recovery_rate),
+                        args=(infection_rate, incubation_rate, recovery_rate),
                         t_eval=time_points)
 
     # storing the results in separate named variables for easier debugging and 
@@ -75,8 +75,8 @@ def run_SEIR_Simulation(title = "default",
 # running the default simulation to test it and compare it against the example provided
 run_SEIR_Simulation()
 
-# running simulation with a doubled exposure rate
-run_SEIR_Simulation(title = "Doubled exposure rate", exposure_rate = 2.0)
+# running simulation with a doubled infection rate
+run_SEIR_Simulation(title = "Doubled_infection rate", infection_rate = 2.0)
 
 # running simulation with a higher initial exposed fraction of population
 run_SEIR_Simulation(title = "higher_initial_exposed", initial_conditions = [0.50, 0.50, 0.0, 0.0])
