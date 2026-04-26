@@ -63,7 +63,7 @@ def run_SEIR_Simulation(title = "default",
     plt.plot(t, e, label="Exposed")
     plt.plot(t, i, label="Infected")
     plt.plot(t, r, label="Recovered")
-    plt.xlabel("Time")
+    plt.xlabel("Time (days)")
     plt.ylabel("Fraction of population")
     plt.title(title)
     plt.legend()
