@@ -81,8 +81,14 @@ run_SEIR_Simulation(title = "Doubled_infection rate", infection_rate = 2.0)
 # running simulation with a higher initial exposed fraction of population
 run_SEIR_Simulation(title = "higher_initial_exposed", initial_conditions = [0.50, 0.50, 0.0, 0.0])
 
-# running simulation with a much 
+# running simulation with a 1/10 lower recovery rate
+run_SEIR_Simulation(title = "low_initial_recovery_rate", recovery_rate = 0.01)
 
+# running simulation with a 1/10 lower recovery rate and longer end time. 
+run_SEIR_Simulation(title = "low_initial_recovery_rate", recovery_rate = 0.01, end_time = 500)
 
+# running a simulation with both different initial values and different transition rates
+run_SEIR_Simulation(title= "multiple different parameters",initial_conditions=[0.8,0.2,0.0,0.0], 
+                    recovery_rate = 0.05, incubation_rate = 1.5, infection_rate = 2.0)
 
 
