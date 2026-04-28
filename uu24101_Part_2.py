@@ -195,7 +195,7 @@ class MonteCarlo_SEIRSimulation:
             Agent.RECOVERED: "Recovered"
         }
 
-
+        # creating a new plot window 
         plt.figure()
 
         for state in [Agent.SUSCEPTIBLE, Agent.EXPOSED, Agent.INFECTED, Agent.RECOVERED]:
