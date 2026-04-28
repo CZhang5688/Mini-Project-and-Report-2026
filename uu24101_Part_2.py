@@ -176,6 +176,45 @@ class MonteCarlo_SEIRSimulation:
         self.count_compartments(step_number)
 
 
+    def plot_lattice(self):
+        # method to plot the resulting lattice configuration from the simulation 
+
+        # assigning the colours for each state 
+        colours = {
+            Agent.SUSCEPTIBLE: "blue",
+            Agent.EXPOSED: "orange",
+            Agent.INFECTED: "red",
+            Agent.RECOVERED: "green"
+        }
+
+        # labeling each state for plotting 
+        labels = {
+            Agent.SUSCEPTIBLE: "Susceptible",
+            Agent.EXPOSED: "Exposed",
+            Agent.INFECTED: "Infected",
+            Agent.RECOVERED: "Recovered"
+        }
+
+
+        plt.figure()
+
+        for state in [Agent.SUSCEPTIBLE, Agent.EXPOSED, Agent.INFECTED, Agent.RECOVERED]:
+            xs = [agent.xpos for agent in self.agents if agent.state == state]
+            ys = [agent.ypos for agent in self.agents if agent.state == state]
+
+            plt.scatter(xs, ys, s=20, c=colours[state], label=labels[state])
+
+
+        # plotting results 
+        plt.xlim(0, self.numlattice)
+        plt.ylim(0, self.numlattice)
+        plt.xlabel("x position")
+        plt.ylabel("y position")
+        plt.title("Monte Carlo SEIR simulation")
+        plt.legend()
+        plt.show()
+
+
 
     
 
