@@ -21,9 +21,7 @@ def SEIR_equations(t, y, infection_rate, incubation_rate, recovery_rate):
     return [dsdt, dedt, didt, drdt]
 
 
-# verifying its working by plotting results and comparing the results with the figure provided 
-# definining initial conditions 
-
+# creating a function to run the SEIR_Simulation
 def run_SEIR_Simulation(title = "default",
                         initial_conditions = [0.99, 0.01, 0.0, 0.0], 
                         start_time = 0,
@@ -40,8 +38,8 @@ def run_SEIR_Simulation(title = "default",
                         args=(infection_rate, incubation_rate, recovery_rate),
                         t_eval=time_points)
 
-    # storing the results in separate named variables for easier debugging and 
-    # tracing of each variable
+    # storing the results in separate named arrays for easier debugging and 
+    # tracing of each array
     t = results.t
     s = results.y[0]
     e = results.y[1]
@@ -56,6 +54,7 @@ def run_SEIR_Simulation(title = "default",
     plt.plot(t, r, label="Recovered")
     plt.xlabel("Time (days)")
     plt.ylabel("Fraction of population")
+    # variable for title so the title can be adjusted for each simulation 
     plt.title(title)
     plt.legend()
     plt.show()
