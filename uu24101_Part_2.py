@@ -280,7 +280,49 @@ if __name__ == "__main__":
     increased_p_infection_sim.run()
     increased_p_infection_sim.plot_results("Increased P(Infection)")
 
-    
+    outbreak_simulation = MonteCarlo_SEIRSimulation(
+        numlattice=100,
+        num_agents=1000,
+        p_susceptible = 0.80,
+        p_exposed = 0.1,
+        p_infected = 0.1,
+        beta=1.0,
+        sigma=0.3,
+        gamma=0.001,
+    )
+
+    outbreak_simulation.run()
+    outbreak_simulation.plot_results("Outbreak")
+
+    outbreak_2_simulation = MonteCarlo_SEIRSimulation(
+        numlattice=100,
+        num_agents=250,
+        p_susceptible = 0.80,
+        p_exposed = 0.1,
+        p_infected = 0.1,
+        beta=1.0,
+        sigma=0.15,
+        gamma=0.001,
+    )
+
+    outbreak_2_simulation.run()
+    outbreak_2_simulation.plot_results("Outbreak v2")
+
+    outbreak_3_simulation = MonteCarlo_SEIRSimulation(
+        numlattice=100,
+        num_agents=125,
+        p_susceptible = 0.80,
+        p_exposed = 0.1,
+        p_infected = 0.1,
+        beta=1.0,
+        sigma=0.15,
+        gamma=0.001,
+    )
+
+    outbreak_3_simulation.run()
+    outbreak_3_simulation.plot_results("Outbreak v3")
+
+
 
 
 
