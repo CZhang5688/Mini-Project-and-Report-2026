@@ -4,8 +4,7 @@ import matplotlib.pyplot as plt
 
 class Agent:
     # infectious agent in the SEIR monte carlo model,
-    # this stores the position and its compartment
-
+    # this stores its position and its compartment,
     # using numbers to represent each state
     EMPTY = 0
     SUSCEPTIBLE = 1
@@ -126,6 +125,7 @@ class MonteCarlo_SEIRSimulation:
 
     def initialise_agents(self):
     # method to place the agents randomly on the 2D lattice initially. 
+    # placing all the agents
         for i in range(self.num_agents):
             placed = False
 
@@ -134,19 +134,21 @@ class MonteCarlo_SEIRSimulation:
                 y = self.rng.integers(0, self.numlattice)
 
                 if self.lattice[x, y] == Agent.EMPTY:
-
+                    
+                    # choosing the initial state of each agent. 
                     state = self.rng.choice(
                         [Agent.SUSCEPTIBLE, Agent.EXPOSED, Agent.INFECTED],
                         p = [self.p_susceptible, self.p_exposed, self.p_infected]
                     )
-
+                    
+                    # initialising all the agents with their respective position and state
                     agent = Agent((x, y), state)
 
                     self.agents.append(agent)
                     self.lattice[x, y] = state
 
                     placed = True
-
+        # counting the initial compartments
         self.count_compartments(0)
 
     def count_compartments(self, step):
