@@ -93,19 +93,22 @@ class MonteCarlo_SEIRSimulation:
     # for testing 
     def __init__(
         self,
-        numlattice=100,
-        num_agents=250,
-        p_susceptible=0.95,
-        beta=1.0,
-        sigma=0.1,
-        gamma=0.005,
-        nsteps=2000,
-        seed=1234,
+        numlattice = 100,
+        num_agents = 250,
+        p_susceptible = 0.95,
+        p_exposed = 0.04,
+        p_infected = 0.01,
+        beta = 1.0,
+        sigma = 0.1,
+        gamma = 0.005,
+        nsteps = 2000,
+        seed = 1234,
     ):
         self.numlattice = numlattice
         self.num_agents = num_agents
         self.p_susceptible = p_susceptible
-        self.p_exposed = 1.0 - p_susceptible
+        self.p_exposed = p_exposed
+        self.p_infected = p_infected
 
         self.beta = beta
         self.sigma = sigma
@@ -136,8 +139,8 @@ class MonteCarlo_SEIRSimulation:
                 if self.lattice[x, y] == Agent.EMPTY:
 
                     state = self.rng.choice(
-                        [Agent.SUSCEPTIBLE, Agent.EXPOSED],
-                        p=[self.p_susceptible, self.p_exposed]
+                        [Agent.SUSCEPTIBLE, Agent.EXPOSED, Agent.INFECTED],
+                        p = [self.p_susceptible, self.p_exposed, self.p_infected]
                     )
 
                     agent = Agent((x, y), state)
@@ -196,7 +199,7 @@ class MonteCarlo_SEIRSimulation:
         }
 
         # creating a new plot window 
-        plt.figure()
+        plt.figure(figsize = (7,7))
 
         for state in [Agent.SUSCEPTIBLE, Agent.EXPOSED, Agent.INFECTED, Agent.RECOVERED]:
             xs = [agent.xpos for agent in self.agents if agent.state == state]
@@ -260,6 +263,8 @@ if __name__ == "__main__":
         numlattice=100,
         num_agents=250,
         p_susceptible=0.95,
+        p_exposed = 0.04,
+        p_infected = 0.01,
         beta=1.0,
         sigma=0.1,
         gamma=0.005,
