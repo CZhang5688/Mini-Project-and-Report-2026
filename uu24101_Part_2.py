@@ -242,6 +242,7 @@ class MonteCarlo_SEIRSimulation:
         for step in range(1, self.nsteps):
             self.step(step)
 
+    # printing the count numbers for everything 100th step for tracing 
             if step % 100 == 0:
                 print(
                     f"Step {step}: "
