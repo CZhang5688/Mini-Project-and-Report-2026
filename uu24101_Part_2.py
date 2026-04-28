@@ -87,6 +87,42 @@ class Agent:
             lattice[self.xpos, self.ypos] = self.state
 
 
+class MonteCarlo_SEIRSimulation:
+    # class to run the Monte Carlo SEIR simulation
+    # default values matched to the example provided in assessment brief 
+    # for testing 
+    def __init__(
+        self,
+        numlattice=100,
+        num_agents=250,
+        p_susceptible=0.95,
+        beta=1.0,
+        sigma=0.1,
+        gamma=0.005,
+        nsteps=2000,
+        seed=1234,
+    ):
+        self.numlattice = numlattice
+        self.num_agents = num_agents
+        self.p_susceptible = p_susceptible
+        self.p_exposed = 1.0 - p_susceptible
+
+        self.beta = beta
+        self.sigma = sigma
+        self.gamma = gamma
+        self.nsteps = nsteps
+
+        self.rng = np.random.default_rng(seed)
+
+        self.lattice = np.zeros((numlattice, numlattice), dtype=int)
+        self.agents = []
+
+        self.susceptible_count = np.zeros(nsteps, dtype=int)
+        self.exposed_count = np.zeros(nsteps, dtype=int)
+        self.infected_count = np.zeros(nsteps, dtype=int)
+        self.recovered_count = np.zeros(nsteps, dtype=int)
+
+        self.initialise_agents()
 
 
     
