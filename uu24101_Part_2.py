@@ -273,6 +273,13 @@ if __name__ == "__main__":
     # plotting the results of the simulation 
     test_simulation.plot_results("test simulation")
 
+    increased_p_infection_sim = MonteCarlo_SEIRSimulation(p_susceptible = 0.75,
+                                                          p_exposed = 0.15,
+                                                          p_infected = 0.10)
+    
+    increased_p_infection_sim.run()
+    increased_p_infection_sim.plot_results("Increased P(Infection)")
+
     
 
 
