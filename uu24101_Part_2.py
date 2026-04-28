@@ -46,9 +46,7 @@ class Agent:
             lattice[self.xpos, self.ypos] = self.state
 
     def infected_neighbour(self, lattice):
-        
         # method to check if neighbours are infected agents. 
-
         numlattice = lattice.shape[0]
 
         directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
@@ -67,7 +65,6 @@ class Agent:
     
     def update_state(self, lattice, rng, beta, sigma, gamma):
         # method to update the SEIR states using SEIR probabilities specified
-
         old_state = self.state
 
         if self.state == Agent.SUSCEPTIBLE:
@@ -241,7 +238,6 @@ class MonteCarlo_SEIRSimulation:
 
     def run(self):
     # method to run a Monte Carlo SEIR simulation 
-
         for step in range(1, self.nsteps):
             self.step(step)
 
