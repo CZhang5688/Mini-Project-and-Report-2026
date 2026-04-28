@@ -236,6 +236,40 @@ class MonteCarlo_SEIRSimulation:
         self.plot_lattice()
         self.plot_population()
 
+    def run(self):
+    # method to run a Monte Carlo SEIR simulation 
+
+        for step in range(1, self.nsteps):
+            self.step(step)
+
+            if step % 100 == 0:
+                print(
+                    f"Step {step}: "
+                    f"S={self.susceptible_count[step]}, "
+                    f"E={self.exposed_count[step]}, "
+                    f"I={self.infected_count[step]}, "
+                    f"R={self.recovered_count[step]}"
+                )
+
+    
+if __name__ == "__main__":
+
+    # initialising and creating the simulation, with default constraints 
+    simulation = MonteCarlo_SEIRSimulation(
+        numlattice=100,
+        num_agents=250,
+        p_susceptible=0.95,
+        beta=1.0,
+        sigma=0.1,
+        gamma=0.005,
+        nsteps=2000,
+        seed=1234,
+    )
+
+    # running the simulation 
+    simulation.run()
+    # plotting the results of the simulation 
+    simulation.plot_results()
 
 
 
