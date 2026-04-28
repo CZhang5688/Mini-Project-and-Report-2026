@@ -124,6 +124,31 @@ class MonteCarlo_SEIRSimulation:
 
         self.initialise_agents()
 
+    def initialise_agents(self):
+    # method to place the agents randomly on the 2D lattice initially. 
+        for i in range(self.num_agents):
+            placed = False
+
+            while not placed:
+                x = self.rng.integers(0, self.numlattice)
+                y = self.rng.integers(0, self.numlattice)
+
+                if self.lattice[x, y] == Agent.EMPTY:
+
+                    state = self.rng.choice(
+                        [Agent.SUSCEPTIBLE, Agent.EXPOSED],
+                        p=[self.p_susceptible, self.p_exposed]
+                    )
+
+                    agent = Agent((x, y), state)
+
+                    self.agents.append(agent)
+                    self.lattice[x, y] = state
+
+                    placed = True
+
+        self.count_compartments(0)
+
 
     
    
