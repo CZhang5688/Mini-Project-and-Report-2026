@@ -176,7 +176,7 @@ class MonteCarlo_SEIRSimulation:
         self.count_compartments(step_number)
 
 
-    def plot_lattice(self):
+    def plot_lattice(self, title):
         # method to plot the resulting lattice configuration from the simulation 
 
         # assigning the colours for each state 
@@ -210,11 +210,11 @@ class MonteCarlo_SEIRSimulation:
         plt.ylim(0, self.numlattice)
         plt.xlabel("x position")
         plt.ylabel("y position")
-        plt.title("Monte Carlo SEIR simulation")
+        plt.title(title)
         plt.legend()
         plt.show()
 
-    def plot_population(self):
+    def plot_population(self, title):
         # method to plot the population against the Monte Carlo
 
         steps = np.arange(self.nsteps)
@@ -227,14 +227,14 @@ class MonteCarlo_SEIRSimulation:
         plt.plot(steps, self.recovered_count, label="Recovered")
         plt.xlabel("Monte Carlo step")
         plt.ylabel("Population")
-        plt.title("Monte Carlo SEIR simulation")
+        plt.title(title)
         plt.legend()
         plt.show()
 
-    def plot_results(self):
+    def plot_results(self, title):
     # simple function to actually plot both the lattice and population plot.  
-        self.plot_lattice()
-        self.plot_population()
+        self.plot_lattice(title)
+        self.plot_population(title)
 
     def run(self):
     # method to run a Monte Carlo SEIR simulation 
@@ -255,7 +255,7 @@ class MonteCarlo_SEIRSimulation:
 if __name__ == "__main__":
 
     # initialising and creating the simulation, with default constraints 
-    simulation = MonteCarlo_SEIRSimulation(
+    test_simulation = MonteCarlo_SEIRSimulation(
         numlattice=100,
         num_agents=250,
         p_susceptible=0.95,
@@ -269,9 +269,11 @@ if __name__ == "__main__":
     )
 
     # running the simulation 
-    simulation.run()
+    test_simulation.run()
     # plotting the results of the simulation 
-    simulation.plot_results()
+    test_simulation.plot_results("test simulation")
+
+    
 
 
 
