@@ -231,6 +231,13 @@ class MonteCarlo_SEIRSimulation:
         plt.legend()
         plt.show()
 
+    def plot_results(self):
+    # simple function to actually plot both the lattice and population plot.  
+        self.plot_lattice()
+        self.plot_population()
+
+
+
 
 
 
