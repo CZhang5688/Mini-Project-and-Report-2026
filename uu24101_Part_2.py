@@ -149,6 +149,36 @@ class MonteCarlo_SEIRSimulation:
 
         self.count_compartments(0)
 
+    def count_compartments(self, step):
+    # method to count how many agents are in each SEIR compartment
+        states = [agent.state for agent in self.agents]
+
+    # counting how many agents are in each different state
+        self.susceptible_count[step] = states.count(Agent.SUSCEPTIBLE)
+        self.exposed_count[step] = states.count(Agent.EXPOSED)
+        self.infected_count[step] = states.count(Agent.INFECTED)
+        self.recovered_count[step] = states.count(Agent.RECOVERED)
+
+    def step(self, step_number):
+    # method to perform one monte carlo step
+        for agent in self.agents:
+            agent.move(self.lattice, self.rng)
+
+            agent.update_state(
+                self.lattice,
+                self.rng,
+                self.beta,
+                self.sigma,
+                self.gamma,
+            )
+
+        # counting the number of agents in each state at each step 
+        self.count_compartments(step_number)
+
+
+
+    
+
 
     
    
