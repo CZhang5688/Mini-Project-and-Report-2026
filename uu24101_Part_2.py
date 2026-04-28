@@ -214,6 +214,24 @@ class MonteCarlo_SEIRSimulation:
         plt.legend()
         plt.show()
 
+    def plot_population(self):
+        # method to plot the population against the Monte Carlo
+
+        steps = np.arange(self.nsteps)
+
+        # plotting the population against the Monte Carlo Steps 
+        plt.figure(figsize=(9, 6))
+        plt.plot(steps, self.susceptible_count, label="Susceptible")
+        plt.plot(steps, self.exposed_count, label="Exposed")
+        plt.plot(steps, self.infected_count, label="Infected")
+        plt.plot(steps, self.recovered_count, label="Recovered")
+        plt.xlabel("Monte Carlo step")
+        plt.ylabel("Population")
+        plt.title("Monte Carlo SEIR simulation")
+        plt.legend()
+        plt.show()
+
+
 
 
     
